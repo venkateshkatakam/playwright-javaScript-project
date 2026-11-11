@@ -23,6 +23,8 @@ test.only('Login Practice Test 2', async ({browser}) => {
     const username = page.locator('#username');
     const password = page.locator("[type='password']");
     const signIn = page.locator('#signInBtn');
+    const cardTitles = page.locator(".card-body a");
+
 
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
     console.log(await page.title());
@@ -36,6 +38,8 @@ test.only('Login Practice Test 2', async ({browser}) => {
     await username.fill("");
     await username.fill("rahulshettyacademy");
     await signIn.click();
-    console.log(await page.locator(".card-body a").textContent());
-
+    //await page.waitForLoadState('networkidle');
+    await cardTitles.first().waitFor();
+    const titles = console.log(await cardTitles.allTextContents());
+    console.log(titles);
 });
